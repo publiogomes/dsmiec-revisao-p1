@@ -7,6 +7,7 @@ exports.create = (req, res) => {
     res.status(400).send({
       message: "Content can not be empty!"
     });
+    return; // Adicionado para garantir que o código não continue após erro
   }
 
   // Create a Tutorial
@@ -18,12 +19,15 @@ exports.create = (req, res) => {
 
   // Save Tutorial in the database
   Tutorial.create(tutorial, (err, data) => {
-    if (err)
+    if (err) {
       res.status(500).send({
         message:
           err.message || "Some error occurred while creating the Tutorial."
       });
-    else res.send(data);
+    } else {
+      console.log("Tutorial created successfully:", data); // Log adicional
+      res.send(data);
+    }
   });
 };
 
@@ -128,3 +132,13 @@ exports.deleteAll = (req, res) => {
     else res.send({ message: `All Tutorials were deleted successfully!` });
   });
 };
+
+
+
+
+
+
+
+
+
+
