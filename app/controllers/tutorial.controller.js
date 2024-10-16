@@ -3,9 +3,9 @@ const Tutorial = require("../models/tutorial.model.js");
 // Create and Save a new Tutorial
 exports.create = (req, res) => {
   // Validate request
-  if (!req.body) {
+  if (!req.body || !req.body.title || !req.body.description) { // Verificação adicional
     res.status(400).send({
-      message: "Content can not be empty!"
+      message: "Content can not be empty or missing required fields!"
     });
     return; // Adicionado para garantir que o código não continue após erro
   }
@@ -81,6 +81,7 @@ exports.update = (req, res) => {
     res.status(400).send({
       message: "Content can not be empty!"
     });
+    return; // Adicionado para garantir que o código não continue após erro
   }
 
   console.log(req.body);
@@ -132,13 +133,3 @@ exports.deleteAll = (req, res) => {
     else res.send({ message: `All Tutorials were deleted successfully!` });
   });
 };
-
-
-
-
-
-
-
-
-
-
