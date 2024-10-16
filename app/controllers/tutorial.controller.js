@@ -14,6 +14,7 @@ exports.create = (req, res) => {
   const tutorial = new Tutorial({
     title: req.body.title,
     description: req.body.description,
+    category: req.body.category, // Novo campo adicionado
     published: req.body.published || false
   });
 
