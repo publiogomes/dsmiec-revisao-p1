@@ -10,6 +10,13 @@ exports.create = (req, res) => {
     return; // Adicionado para garantir que o código não continue após erro
   }
 
+  // Verificação adicional para o título
+  if (req.body.title.length < 3) {
+    return res.status(400).send({
+      message: "Title must be at least 3 characters long!"
+    });
+  }
+
   // Create a Tutorial
   const tutorial = new Tutorial({
     title: req.body.title,
